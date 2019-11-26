@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mallo.index.dao.SysDepDAO">
+  <resultMap id="depResult" type="com.mallo.index.model.vo.SysDep">
+    <id column="dep_id" jdbcType="INTEGER" property="depId" />
+    <result column="dep_name" jdbcType="VARCHAR" property="depName" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="dep_level" jdbcType="TINYINT" property="depLevel" />
+    <result column="dep_code" jdbcType="VARCHAR" property="depCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_num" jdbcType="INTEGER" property="userNum" />
+    <result column="operate_user_id" jdbcType="INTEGER" property="operateUserId" />
+    
+    <collection property="depList" ofType="com.mallo.index.model.po.generator.SysDepartment" column="dep_id" select="selectOrgList"></collection>
+  </resultMap>
+  
+	<!-- 查询所有机构的部门信息（包含各机构） -->
+	<select id="selectOrgList" resultMap="depResult">
+		select * from sys_department where parent_id = #{organId}
+	</select>
+	
+	<!-- 查询指定机构下的部门目录（包含机构） -->
+	<select id="selectDepList" parameterType="int" resultMap="depResult">
+		select * from sys_department where dep_id = #{organId}
+	</select>
+  
+</mapper>

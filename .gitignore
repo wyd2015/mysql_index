@@ -1,0 +1,10 @@
+/target/
+/.classpath
+.project
+/.settings/
+/log/
+/.idea/
+/bin/
+/tools/
+/src/test/
+/.mvn

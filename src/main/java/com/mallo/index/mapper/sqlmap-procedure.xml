@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mallo.index.dao.DepProcedureDAO">
+	<select id="generateDepAlertTable" statementType="CALLABLE">
+		<![CDATA[ 
+        call generate_t_alert_dep (
+	        #{organId, mode=IN, jdbcType=INTEGER},
+	        #{tAlertName, mode=IN, jdbcType=VARCHAR}
+        );
+        ]]>
+	</select>
+	
+	<select id="generateDepEventTable" statementType="CALLABLE">
+		<![CDATA[ 
+        call generate_t_event_dep (
+	        #{organId, mode=IN, jdbcType=INTEGER},
+	        #{tEventName, mode=IN, jdbcType=VARCHAR}
+        );
+        ]]>
+	</select>
+</mapper>
